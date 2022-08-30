@@ -1,7 +1,15 @@
+let books;
+
 function renderBooks(filter) {
   const booksWrapper = document.querySelector('.books');
   
-  const books = getBooks();
+  booksWrapper.classList += ' books__loading'
+  
+  if (!books) {
+    books = getBooks();
+  }
+
+  booksWrapper.classList.remove('books__loading')
 
   if (filter === 'LOW_TO_HIGH') {
     books.sort((a, b) => (a.salePrice || a.originalPrice) - (b.salePrice || b.originalPrice));
@@ -58,11 +66,11 @@ function ratingsHTML(rating) {
 }
 
 function filterBooks(event) {
-    renderBooks(event.target.value);
+  renderBooks(event.target.value);
 }
 
 setTimeout(() => {
-  renderBooks();
+ renderBooks();
 });
 
 
